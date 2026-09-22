@@ -1,123 +1,143 @@
 const CutoutView = require('ti.cutoutview');
 
+let expanded = false;
+
 const window = Ti.UI.createWindow({
-	backgroundColor: '#EDE7F7',
-	title: 'TiCutoutView 0.3.0'
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	backgroundColor: Ti.UI.userInterfaceStyle === 1 ? '#FFFFFF' : '#000000'
 });
 
-const backdrop = Ti.UI.createView({
-	top: 72,
-	left: 24,
-	right: 24,
-	height: 470,
-	backgroundGradient: {
-		type: 'linear',
-		startPoint: {x: '0%', y: '0%'},
-		endPoint: {x: '100%', y: '100%'},
-		colors: ['#8EC5FC', '#E0C3FC', '#FBC2EB']
-	}
+window.add(
+	Ti.UI.createImageView({
+		image: Ti.UI.userInterfaceStyle === 1 ? 'images/iOS-27-Blue.jpg' : 'images/iOS-27-Dark-Ink.jpg',
+		width: Ti.UI.FILL,
+		height: Ti.UI.FILL,
+		scalingMode: Ti.Media.IMAGE_SCALING_ASPECT_FILL,
+		preventDefaultImage: true
+	})
+);
+
+const wrapper = Ti.UI.createView({
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	left: 12,
+	right: 12
 });
 
 const panel = CutoutView.createView({
 	cutoutPlacement: CutoutView.PLACEMENT_BOTTOM_LEFT,
-	cutoutShape: CutoutView.SHAPE_RECTANGLE,
-	cutoutSize: {width: 112, height: 84},
-	cutoutCornerRadius: 18,
-	cutoutCenterOffset: {x: 0, y: 0},
-	cutoutSmoothing: 12,
-
+	cutoutShape: CutoutView.SHAPE_CIRCLE,
+	cutoutRadius: 34,
+	cutoutCenterOffset: { x: 0, y: 0 },
+	cutoutSmoothing: 8,
+	// iOS 26+ Liquid Glass
 	material: CutoutView.MATERIAL_GLASS,
 	glassStyle: CutoutView.GLASS_STYLE_REGULAR,
-	glassTintColor: '#20FFFFFF',
+	// glassTintColor: '#20FFFFFF',
 	glassInteractive: true,
-
+	// View Styles
 	cornerRadius: 24,
-	borderColor: '#A0FFFFFF',
+	borderColor: Ti.UI.userInterfaceStyle === 1 ? '#FFFFFF' : '#000000',
 	borderWidth: 1,
-	shadowColor: '#241A32',
-	shadowOpacity: 0.24,
-	shadowRadius: 14,
-	shadowOffset: {x: 0, y: 6},
+	// shadowColor: 'rgba(0, 0, 0, 0.24)',
+	// shadowRadius: 6,
+	// shadowOffset: { x: 0, y: 0 },
 	clipContentToShape: true,
 	shapeAwareHitTesting: true,
-
-	left: 46,
-	right: 14,
-	top: 28,
-	height: 350
+	width: Ti.UI.FILL,
+	height: 200,
+	top: 1, // whenever panel (CutoutView) has a border that touched display/viewport edge, use the border width as a margin for each of those edges
+	left: 32,
+	right: 1 // whenever panel (CutoutView) has a border that touched display/viewport edge, use the border width as a margin for each of those edges
 });
 
 panel.add(
-	Ti.UI.createLabel({
-		text: 'Rectangular glass cutout',
-		top: 34,
-		left: 28,
-		right: 28,
-		color: '#21172B',
-		font: {fontSize: 26, fontWeight: 'bold'}
+	Ti.UI.createView({
+		backgroundColor: Ti.UI.userInterfaceStyle === 1 ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.3)',
+		width: Ti.UI.FILL,
+		height: 16,
+		top: 24,
+		left: 24,
+		right: 24,
+		borderRadius: 8
 	})
 );
 
 panel.add(
-	Ti.UI.createLabel({
-		text: 'The glass, border, shadow, child clipping, and hit testing all follow the same rounded-rectangle path.',
-		top: 88,
-		left: 28,
-		right: 28,
-		color: '#463B50',
-		font: {fontSize: 17}
+	Ti.UI.createView({
+		backgroundColor: Ti.UI.userInterfaceStyle === 1 ? 'rgba(0, 0, 0, 0.15)' : 'rgba(255, 255, 255, 0.15)',
+		width: Ti.UI.FILL,
+		height: 12,
+		top: 52,
+		left: 24,
+		right: 24,
+		borderRadius: 6
+	})
+);
+
+panel.add(
+	Ti.UI.createView({
+		backgroundColor: Ti.UI.userInterfaceStyle === 1 ? 'rgba(0, 0, 0, 0.15)' : 'rgba(255, 255, 255, 0.15)',
+		width: '50%',
+		height: 12,
+		top: 76,
+		left: 24,
+		right: 24,
+		borderRadius: 6
 	})
 );
 
 const avatar = Ti.UI.createView({
-	left: -6,
-	top: 340,
-	width: 104,
-	height: 76,
-	borderRadius: 16,
-	borderColor: '#FFFFFF',
-	borderWidth: 4,
-	backgroundColor: '#6F4C8B',
+	left: 0,
+	top: 172,
+	width: 60,
+	height: 60,
+	borderRadius: 30,
+	borderColor: Ti.UI.userInterfaceStyle === 1 ? '#FFFFFF' : '#000000',
+	borderWidth: 1,
+	backgroundColor: Ti.UI.userInterfaceStyle === 1 ? '#000000' : '#FFFFFF',
 	zIndex: 2
 });
 
 avatar.add(
 	Ti.UI.createLabel({
-		text: 'JM',
-		color: '#FFFFFF',
-		font: {fontSize: 30, fontWeight: 'bold'}
+		text: '¯\\_(ツ)_/¯',
+		color: Ti.UI.userInterfaceStyle === 1 ? '#FFFFFF' : '#000000',
+		font: { fontSize: 10, fontWeight: 'bold' }
 	})
 );
 
 const animateButton = Ti.UI.createButton({
-	title: 'Expand rectangle cutout',
-	top: 570,
+	top: 300,
 	left: 34,
 	right: 34,
-	height: 48
+	height: 48,
+	tintColor: '#FFFFFF',
+	font: { fontSize: 14, fontWeight: 'semibold' }
 });
 
-let expanded = false;
+animateButton.title = expanded ? 'restore cutout' : 'expand cutout';
+
 animateButton.addEventListener('click', () => {
 	expanded = !expanded;
 	panel.animateCutout({
-		cutoutSize: expanded ? {width: 132, height: 100} : {width: 112, height: 84},
-		cutoutCornerRadius: expanded ? 28 : 18,
-		cutoutSmoothing: expanded ? 16 : 12,
+		cutoutRadius: expanded ? 66 : 34,
+		cutoutSmoothing: expanded ? 16 : 8,
 		duration: 750,
 		timing: 'spring',
 		dampingRatio: 0.78,
 		respectReducedMotion: true
 	});
-	animateButton.title = expanded ? 'Restore rectangle cutout' : 'Expand rectangle cutout';
+	animateButton.title = expanded ? 'restore cutout' : 'expand cutout';
 });
 
 panel.addEventListener('cutoutanimationcomplete', (event) => {
 	Ti.API.info(`[TiCutoutView] animation finished: ${event.finished}`);
 });
 
-backdrop.add(panel);
-backdrop.add(avatar);
-window.add(backdrop);
+wrapper.add(panel);
+wrapper.add(avatar);
+window.add(wrapper);
 window.add(animateButton);
 window.open();
