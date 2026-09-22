@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:module xmlns:ti="http://ti.tidev.io">
+	<id>ti.cutoutview</id>
+	<version>0.3.0</version>
+	<platform>iphone</platform>
+	<minsdk>13.3.0.GA</minsdk>
+	<name>TiCutoutView</name>
+	<description>Shape-aware Titanium iOS container with configurable circular and rectangular cutouts, materials, and animation</description>
+	<license>MIT</license>
+	<copyright>Copyright (c) 2026 DesignByMind LLC</copyright>
+	<iphone>
+	</iphone>
+</ti:module>

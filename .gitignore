@@ -1,0 +1,6 @@
+.DS_Store
+ios/build/
+ios/dist/
+ios/metadata.json
+ios/TiCutoutView.xcodeproj/project.xcworkspace/xcuserdata/
+ios/TiCutoutView.xcodeproj/xcuserdata/
