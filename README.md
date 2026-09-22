@@ -1,5 +1,13 @@
 # TiCutoutView
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/TiCutoutView-Screenshot-Dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/TiCutoutView-Screenshot-Light.png">
+    <img src="assets/TiCutoutView-Screenshot-Light.png" alt="TiCutoutView Example" width="640">
+  </picture>
+</p>
+
 `ti.cutoutview` is a UIKit-backed Titanium iOS container whose fill, border, drop shadow, content mask, and visual-effect material all follow one configurable shape. Version `0.3.0` supports circular and rectangular concave cutouts at every corner or edge, native path animation, blur, and iOS 26 Liquid Glass.
 
 ## Requirements
